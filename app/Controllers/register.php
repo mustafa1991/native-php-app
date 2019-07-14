@@ -27,5 +27,5 @@ if ($hasErrors === false) {
 
 //*** Handle redirection after saving ***//
 if ($success) {
-    header('Location: /index.php');
+    header('Location: /index.html');
 }

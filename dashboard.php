@@ -1,3 +1,8 @@
+<?php
+require_once(__DIR__ . '/app/Repository/UserRepository.php');
+$userRepo = new UserRepository();
+$users = $userRepo->getAll();
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -10,7 +15,7 @@
     <link rel="stylesheet" href="css/all.css">
     <link rel="stylesheet" href="css/main.css">
 
-    <title>Workshop | Home</title>
+    <title>Workshop | Dashboard</title>
 </head>
 <body>
 
@@ -23,8 +28,8 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Home</a>
+                <li class="nav-item">
+                    <a class="nav-link" href="">Home</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/login.html">Login</a>
@@ -33,7 +38,7 @@
                     <a class="nav-link" href="/register.html">Register</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/dashboard.php">Dashboard</a>
+                    <a class="nav-link active" href="/dashboard.php">Dashboard</a>
                 </li>
             </ul>
         </div>
@@ -41,7 +46,30 @@
 </header>
 
 <article class="main container">
-    <h2 class="text-center mt-5">Simple Native PHP Application</h2>
+    <section>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">First Name</th>
+                <th scope="col">Email</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            <?php
+            foreach ($users as $user) {
+                echo '<tr>';
+                echo '<th scope="row">' . $user->getId() . '</th>';
+                echo '<td>' . $user->getFname() . '</td>';
+                echo '<td>' . $user->getEmail() . '</td>';
+                echo '</tr>';
+            }
+            ?>
+
+            </tbody>
+        </table>
+    </section>
 </article>
 
 <!-- Optional JavaScript -->
