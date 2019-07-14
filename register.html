@@ -23,21 +23,24 @@
                 <div class="auth-intro">
                     <h1 class="auth-title">Registration form</h1>
                 </div>
-                <form id="registerForm">
+                <form id="registerForm" method="post" action="/app/Controllers/register.php">
                     <div class="form-group">
                         <i class="far fa-user"></i>
                         <label for="firstName">First Name</label>
-                        <input id="firstName" type="text" placeholder="First Name" class="form-control" required/>
+                        <input id="firstName" name="fname" type="text" placeholder="First Name" class="form-control"
+                               required/>
                     </div>
                     <div class="form-group">
                         <i class="far fa-envelope"></i>
                         <label for="email">Email</label>
-                        <input id="email" type="email" placeholder="Entre Your Email" class="form-control" required/>
+                        <input id="email" type="email" name="email" placeholder="Entre Your Email" class="form-control"
+                               required/>
                     </div>
                     <div class="form-group">
                         <i class="fas fa-key"></i>
                         <label for="pass">Password</label>
-                        <input id="pass" type="password" placeholder="Entre Your Password" class="form-control"
+                        <input id="pass" type="password" name="password" placeholder="Entre Your Password"
+                               class="form-control"
                                required/>
                     </div>
                     <div class="text-center submit-btn">
