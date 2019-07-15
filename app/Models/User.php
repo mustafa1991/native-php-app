@@ -18,6 +18,11 @@ class User
     protected $email;
 
     /**
+     * @var string $email
+     */
+    protected $password;
+
+    /**
      * User constructor.
      *
      */
@@ -63,5 +68,21 @@ class User
     public function getId(): int
     {
         return $this->id;
+    }
+
+    /**
+     * @param string $password
+     */
+    public function setPassword($password)
+    {
+        $this->password = $password;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPassword()
+    {
+        return $this->password;
     }
 }

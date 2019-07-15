@@ -16,9 +16,15 @@ if (filter_var($data['email'], FILTER_VALIDATE_EMAIL) === false) {
     $hasErrors = true;
 }
 
+if (!isset($data['fname']) || empty($data['fname'])) {
+    $hasErrors = true;
+}
+// @todo: continue validating remaining inputs
+
 
 //*** Insert request data into DB ***//
 $success = false;
+
 if ($hasErrors === false) {
     $userRepo = new UserRepository();
     $success = $userRepo->create($data);
@@ -27,5 +33,6 @@ if ($hasErrors === false) {
 
 //*** Handle redirection after saving ***//
 if ($success) {
-    header('Location: /index.html');
+    header('Location: /index.php');
+    exit();
 }
