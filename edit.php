@@ -1,8 +1,26 @@
 <?php
+
 require_once(__DIR__ . '/app/Repository/UserRepository.php');
-$userRepo = new UserRepository();
-$users = $userRepo->getAll();
+
+// Check if there are parameter in Get
+if (isset($_GET['id']) && !empty($_GET['id'])) {
+    $user_id = $_GET['id'];
+} else {
+    echo 'There is no parameter id in requested URL.';
+    exit();
+}
+
+// select and get the user from DB with $user_id
+$userRepository = new UserRepository();
+$user = $userRepository->getById($user_id);
+
+// Check if there are exist user with $user_id
+if (!$user) {
+    echo 'No User with the selected ID';
+    exit();
+}
 ?>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -15,7 +33,7 @@ $users = $userRepo->getAll();
     <link rel="stylesheet" href="css/all.css">
     <link rel="stylesheet" href="css/main.css">
 
-    <title>Workshop | Dashboard</title>
+    <title>Workshop | Home</title>
 </head>
 <body>
 
@@ -28,7 +46,7 @@ $users = $userRepo->getAll();
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
-                <li class="nav-item">
+                <li class="nav-item active">
                     <a class="nav-link" href="">Home</a>
                 </li>
                 <li class="nav-item">
@@ -38,7 +56,7 @@ $users = $userRepo->getAll();
                     <a class="nav-link" href="/register.php">Register</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="/dashboard.php">Dashboard</a>
+                    <a class="nav-link" href="/dashboard.php">Dashboard</a>
                 </li>
             </ul>
         </div>
@@ -46,37 +64,36 @@ $users = $userRepo->getAll();
 </header>
 
 <article class="main container">
-    <section>
-        <table class="table table-striped">
-            <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">First Name</th>
-                <th scope="col">Email</th>
-                <th scope="col">Actions</th>
-            </tr>
-            </thead>
-            <tbody>
+    <form method="post" action="/app/Controllers/update.php">
 
-            <?php
-            foreach ($users as $user) {
-                echo '<tr>';
-                echo '<th scope="row">' . $user->getId() . '</th>';
-                echo '<td>' . $user->getFname() . '</td>';
-                echo '<td>' . $user->getEmail() . '</td>';
+        <input type="hidden" name="id" value="<?php echo $user->getId(); ?>">
 
-                echo '<td>';
-                echo '<a class="btn btn-primary" href="/edit.php?id=' . $user->getId() . '">Edit</a>';
-                echo '<a class="btn btn-danger m-lg-1" href="/app/Controllers/delete.php?id=' . $user->getId() . '">Delete</a>';
-                echo '</td>';
+        <div class="form-group">
+            <label for="firstName">First Name</label>
+            <input id="firstName" value="<?php echo $user->getFname(); ?>" name="fname" type="text"
+                   placeholder="First Name" class="form-control"
+                   required/>
+        </div>
 
-                echo '</tr>';
-            }
-            ?>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input id="email" name="email" value="<?php echo $user->getEmail(); ?>" type="text" placeholder="Email"
+                   class="form-control"
+                   required/>
+        </div>
 
-            </tbody>
-        </table>
-    </section>
+        <div class="form-group">
+            <label for="pass">Password</label>
+            <input id="pass" type="password" name="password" placeholder="Entre Your Password"
+                   class="form-control"
+                   required/>
+        </div>
+
+        <div class="text-center submit-btn">
+            <button type="submit" class="btn btn-primary">Update</button>
+        </div>
+
+    </form>
 </article>
 
 <!-- Optional JavaScript -->

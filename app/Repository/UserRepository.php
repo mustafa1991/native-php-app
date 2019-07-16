@@ -66,4 +66,77 @@ class UserRepository
 
         return $result;
     }
+
+    /**
+     * Get user by id
+     *
+     * @return User
+     */
+    public function getById($id)
+    {
+        $result = null;
+
+        try {
+            $db = DBConnection::connect();
+            $stmt = $db->prepare("SELECT * FROM $this->table where id = :user_id");
+            $stmt->bindValue(':user_id', $id);
+            $stmt->execute();
+            $stmt->setFetchMode(PDO::FETCH_CLASS, User::class);
+            $result = $stmt->fetch();
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            exit();
+        }
+
+        return $result;
+    }
+
+    /**
+     * Update user
+     *
+     * @param User $user
+     * @return bool
+     */
+    public function update(User $user): bool
+    {
+        $success = false;
+
+        try {
+            $db = DBConnection::connect();
+            $stmt = $db->prepare("UPDATE $this->table set fname=:fname, email=:email, password=:password where id = :user_id");
+            $stmt->bindValue(':user_id', $user->getId());
+            $stmt->bindValue(':fname', $user->getFname());
+            $stmt->bindValue(':email', $user->getEmail());
+            $stmt->bindValue(':password', md5($user->getPassword()));
+            $success = $stmt->execute();
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            exit();
+        }
+
+        return $success;
+    }
+
+    /**
+     * Update user
+     *
+     * @param int $user
+     * @return bool
+     */
+    public function deleteById($id): bool
+    {
+        $success = false;
+
+        try {
+            $db = DBConnection::connect();
+            $stmt = $db->prepare("DELETE FROM $this->table where id = :user_id");
+            $stmt->bindValue(':user_id', $id);
+            $success = $stmt->execute();
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            exit();
+        }
+
+        return $success;
+    }
 }

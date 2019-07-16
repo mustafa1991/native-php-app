@@ -85,4 +85,12 @@ class User
     {
         return $this->password;
     }
+
+    /**
+     * @param int $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
 }
