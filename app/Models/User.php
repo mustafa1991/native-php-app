@@ -23,6 +23,11 @@ class User
     protected $password;
 
     /**
+     * @var
+     */
+    protected $profile_img;
+
+    /**
      * User constructor.
      *
      */

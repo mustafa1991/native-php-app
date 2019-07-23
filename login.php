@@ -23,16 +23,16 @@
                 <div class="auth-intro">
                     <h1 class="auth-title">Login form</h1>
                 </div>
-                <form id="loginForm">
+                <form id="loginForm" method="post" action="/app/Controllers/login.php">
                     <div class="form-group">
                         <i class="far fa-user"></i>
                         <label for="email">Email</label>
-                        <input id="email" type="email" placeholder="Entre Your Email" class="form-control" required/>
+                        <input id="email" name="email" type="email" placeholder="Entre Your Email" class="form-control" required/>
                     </div>
                     <div class="form-group">
                         <i class="fas fa-key"></i>
                         <label for="pass">Password</label>
-                        <input id="pass" type="password" placeholder="Entre Your Password" class="form-control"
+                        <input id="pass" name="password" type="password" placeholder="Entre Your Password" class="form-control"
                                required/>
                     </div>
                     <div class="text-center submit-btn">

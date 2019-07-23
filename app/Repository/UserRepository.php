@@ -139,4 +139,31 @@ class UserRepository
 
         return $success;
     }
+
+    /**
+     * User login
+     *
+     * @param $email
+     * @param $password
+     * @return User|null
+     */
+    public function login($email, $password)
+    {
+        $result = null;
+
+        try {
+            $db = DBConnection::connect();
+            $stmt = $db->prepare("SELECT * FROM $this->table where email = :email and password = :password limit 1");
+            $stmt->bindValue(':email', $email);
+            $stmt->bindValue(':password', md5($password));
+            $stmt->execute();
+            $stmt->setFetchMode(PDO::FETCH_CLASS, User::class);
+            $result = $stmt->fetch();
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            exit();
+        }
+
+        return $result;
+    }
 }

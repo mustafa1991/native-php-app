@@ -1,5 +1,7 @@
 <?php
 require_once(__DIR__ . '/app/Repository/UserRepository.php');
+require_once(__DIR__ . '/app/includes/sessionStart.php');
+require_once(__DIR__ . '/app/includes/sessionAuth.php');
 $userRepo = new UserRepository();
 $users = $userRepo->getAll();
 ?>
@@ -39,6 +41,9 @@ $users = $userRepo->getAll();
                 </li>
                 <li class="nav-item">
                     <a class="nav-link active" href="/dashboard.php">Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/app/Controllers/logout.php">Logout</a>
                 </li>
             </ul>
         </div>

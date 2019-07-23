@@ -23,7 +23,7 @@
                 <div class="auth-intro">
                     <h1 class="auth-title">Registration form</h1>
                 </div>
-                <form id="registerForm" method="post" action="/app/Controllers/register.php">
+                <form id="registerForm" method="post" action="/app/Controllers/register.php" enctype="multipart/form-data">
                     <div class="form-group">
                         <i class="far fa-user"></i>
                         <label for="firstName">First Name</label>
@@ -43,6 +43,13 @@
                                class="form-control"
                                required/>
                     </div>
+
+                    <div class="form-group">
+                        <label for="profile-img">Profile Image</label>
+                        <input id="profile-img" type="file" name="profile-img" accept="image/*"
+                               class="form-control"/>
+                    </div>
+
                     <div class="text-center submit-btn">
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </div>
