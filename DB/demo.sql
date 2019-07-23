@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jul 14, 2019 at 08:04 PM
+-- Generation Time: Jul 23, 2019 at 01:32 PM
 -- Server version: 5.7.26-0ubuntu0.16.04.1
 -- PHP Version: 7.3.6-1+ubuntu16.04.1+deb.sury.org+1
 
@@ -17,10 +17,10 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `demo`
+-- Database: `afci_demo`
 --
-CREATE DATABASE IF NOT EXISTS `demo` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
-USE `demo`;
+CREATE DATABASE IF NOT EXISTS `afci_demo` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `afci_demo`;
 
 -- --------------------------------------------------------
 
@@ -33,12 +33,9 @@ CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `fname` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
-  `password` varchar(255) NOT NULL
+  `password` varchar(255) NOT NULL,
+  `profile_img` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `users`
---
 
 --
 -- Indexes for dumped tables
@@ -58,4 +55,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
